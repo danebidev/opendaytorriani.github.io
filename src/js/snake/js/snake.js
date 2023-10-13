@@ -304,7 +304,6 @@ SNAKE.Snake = SNAKE.Snake || (function() {
         };
 
         me.handleDeath = function() {
-            snakeSpeed = parseInt(selectedSpeed);
             handleEndCondition(playingBoard.handleDeath);
         };
 
