@@ -748,12 +748,6 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmHighscorePanel.style.top = pLabelTop;
             elmHighscorePanel.style.left = cWidth - 140 + "px";
 
-            if (cWidth < 700) {
-                elmAboutPanel.style.display = "none";
-            } else {
-                elmAboutPanel.style.display = "block";
-            }
-
             me.grid = [];
             var numBoardCols = fWidth / me.getBlockWidth() + 2;
             var numBoardRows = fHeight / me.getBlockHeight() + 2;
