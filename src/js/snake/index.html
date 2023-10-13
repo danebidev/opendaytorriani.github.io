@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!doctype html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -12,34 +13,7 @@
         <link rel="shortcut icon" href="css/images/favicon.png" />
     </head>
     <body>
-        <div class="snake-toolbar">
-            <div style="display: inline-block; margin-right: 10px">
-                <span>Theme:</span>
-                <select autocomplete="off" onchange="getTheme()" id="select">
-                    <option>Light Theme</option>
-                    <option selected>Main Theme</option>
-                    <option>Dark Theme</option>
-                    <option>Green Theme</option>
-                    <option>Matrix Theme</option>
-                    <option>Theme</option>
-                    <option>Snake Head Theme</option>
-                </select>
-            </div>
-            <div style="display: inline-block; margin-right: 10px">
-                <span>Mode:</span>
-                <select id="selectMode">
-                    <option value="100">Easy</option>
-                    <option value="75" selected>Medium</option>
-                    <option value="50">Hard</option>
-                    <option value="25">Impossible</option>
-                    <option value="110">Rush</option>
-                </select>
-            </div>
-            <button onclick="go_full_screen()">Full Screen</button><br />
-        </div>
-
         <div id="mode-wrapper" style="display: inline; width: auto"></div>
-
         <div id="game-area" tabindex="0"></div>
         <script type="text/javascript" src="./js/snake.js"></script>
         <script type="text/javascript" src="./js/init.js"></script>
