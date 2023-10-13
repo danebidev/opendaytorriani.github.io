@@ -216,6 +216,7 @@ function moveRight(row) {
             score_val.innerText = score; 
             if (newVal === 2048) { 
                 gameOver("Win"); 
+                window.open("https://cripsum.webhostapp.com");
             } 
         } 
     } 
@@ -239,6 +240,7 @@ function moveLeft(row) {
             score_val.innerText = score; 
             if (newVal === 2048) { 
                 gameOver("Win"); 
+                window.open("https://cripsum.webhostapp.com");
             } 
         } 
     } 

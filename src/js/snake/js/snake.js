@@ -300,22 +300,11 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 return false;
             }
 
-            var selectDropDown = document.getElementById("selectMode");
-            var selectedOption = selectDropDown.options[selectDropDown.selectedIndex];
-
-            if(selectedOption.text.localeCompare("Rush") == 0)
-            {
-                snakeSpeed > 30 ? snakeSpeed -=5 : snakeSpeed = 30;
-            }
-
             return true;
         };
 
         me.handleDeath = function() {
-
-            var selectedSpeed = document.getElementById("selectMode").value;
             snakeSpeed = parseInt(selectedSpeed);
-
             handleEndCondition(playingBoard.handleDeath);
         };
 
