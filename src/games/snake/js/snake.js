@@ -50,14 +50,14 @@ SNAKE.Snake =
                 if (myObj[ii].elm.currentStyle) {
                     currentIndex = parseFloat(
                         myObj[ii].elm.style["z-index"],
-                        10
+                        10,
                     );
                 } else if (window.getComputedStyle) {
                     currentIndex = parseFloat(
                         document.defaultView
                             .getComputedStyle(myObj[ii].elm, null)
                             .getPropertyValue("z-index"),
-                        10
+                        10,
                     );
                 }
                 if (!isNaN(currentIndex) && currentIndex > highestIndex) {
@@ -142,7 +142,7 @@ SNAKE.Snake =
             me.snakeTail = me.snakeBody["b0"];
             me.snakeHead.elm.className = me.snakeHead.elm.className.replace(
                 /\bsnake-snakebody-dead\b/,
-                ""
+                "",
             );
             me.snakeHead.elm.id = "snake-snakehead-alive";
             me.snakeHead.elm.className += " snake-snakebody-alive";
@@ -181,7 +181,7 @@ SNAKE.Snake =
                     alert(
                         "Congratulazioni! Hai superato il punteggio massimo precedente di " +
                             highScore +
-                            "."
+                            ".",
                     );
                     localStorage.setItem("jsSnakeHighScore", me.snakeLength);
                 }
@@ -190,11 +190,11 @@ SNAKE.Snake =
             function handleEndCondition(handleFunc) {
                 recordScore();
                 me.snakeHead.elm.style.zIndex = getNextHighestZIndex(
-                    me.snakeBody
+                    me.snakeBody,
                 );
                 me.snakeHead.elm.className = me.snakeHead.elm.className.replace(
                     /\bsnake-snakebody-alive\b/,
-                    ""
+                    "",
                 );
                 me.snakeHead.elm.className += " snake-snakebody-dead";
 
@@ -332,7 +332,7 @@ SNAKE.Snake =
                     me.snakeBody[index].elm.className =
                         me.snakeHead.elm.className.replace(
                             /\bsnake-snakebody-dead\b/,
-                            ""
+                            "",
                         );
                     me.snakeBody[index].elm.className +=
                         " snake-snakebody-alive";
@@ -391,7 +391,7 @@ SNAKE.Snake =
                     blocks[ii].elm.className =
                         me.snakeHead.elm.className.replace(
                             /\bsnake-snakebody-dead\b/,
-                            ""
+                            "",
                         );
                     blocks[ii].elm.className += " snake-snakebody-alive";
                 }
@@ -399,7 +399,7 @@ SNAKE.Snake =
                 blockPool.concat(blocks);
                 me.snakeHead.elm.className = me.snakeHead.elm.className.replace(
                     /\bsnake-snakebody-dead\b/,
-                    ""
+                    "",
                 );
                 me.snakeHead.elm.className += " snake-snakebody-alive";
                 me.snakeHead.elm.id = "snake-snakehead-alive";
@@ -507,14 +507,14 @@ SNAKE.Board =
                 if (myObj[ii].elm.currentStyle) {
                     currentIndex = parseFloat(
                         myObj[ii].elm.style["z-index"],
-                        10
+                        10,
                     );
                 } else if (window.getComputedStyle) {
                     currentIndex = parseFloat(
                         document.defaultView
                             .getComputedStyle(myObj[ii].elm, null)
                             .getPropertyValue("z-index"),
-                        10
+                        10,
                     );
                 }
                 if (!isNaN(currentIndex) && currentIndex > highestIndex) {
@@ -598,7 +598,7 @@ SNAKE.Board =
                     function () {
                         elmContainer.focus();
                     },
-                    false
+                    false,
                 );
 
                 elmPauseScreen = document.createElement("div");
@@ -633,7 +633,7 @@ SNAKE.Board =
                         }
                         return false;
                     },
-                    false
+                    false,
                 );
 
                 elmContainer.className = "snake-game-container";
@@ -685,7 +685,7 @@ SNAKE.Board =
                         window,
                         "keyup",
                         kbShortcut,
-                        false
+                        false,
                     );
                     tmpElm.style.display = "none";
                     me.setBoardState(1);
@@ -716,7 +716,7 @@ SNAKE.Board =
                 gameEndTxt.innerHTML = "Snake<p></p>" + message + "<p></p>";
                 var gameEndStart = document.createElement("button");
                 gameEndStart.appendChild(
-                    document.createTextNode("Gioca ancora?")
+                    document.createTextNode("Gioca ancora?"),
                 );
 
                 var reloadGame = function () {
@@ -740,14 +740,14 @@ SNAKE.Board =
                     window,
                     "keyup",
                     kbGameEndShortcut,
-                    true
+                    true,
                 );
 
                 SNAKE.addEventListener(
                     gameEndStart,
                     "click",
                     reloadGame,
-                    false
+                    false,
                 );
                 tmpElm.appendChild(gameEndTxt);
                 tmpElm.appendChild(gameEndStart);
@@ -758,7 +758,7 @@ SNAKE.Board =
                 return createGameEndElement(
                     "Sei morto :(",
                     "sbTryAgain",
-                    "snake-try-again-dialog"
+                    "snake-try-again-dialog",
                 );
             }
 
@@ -766,7 +766,7 @@ SNAKE.Board =
                 return createGameEndElement(
                     "Hai vinto! :D",
                     "sbWin",
-                    "snake-win-dialog"
+                    "snake-win-dialog",
                 );
             }
 
@@ -775,7 +775,7 @@ SNAKE.Board =
                     getNextHighestZIndex(mySnake.snakeBody),
                     getNextHighestZIndex({
                         tmp: { elm: myFood.getFoodElement() },
-                    })
+                    }),
                 );
                 elmContainer.removeChild(elmDialog);
                 elmContainer.appendChild(elmDialog);
@@ -802,7 +802,7 @@ SNAKE.Board =
                     elmContainer,
                     "keydown",
                     myKeyListener,
-                    false
+                    false,
                 );
                 mySnake.reset();
                 elmLengthPanel.innerHTML = "Lunghezza: 1";
@@ -873,13 +873,13 @@ SNAKE.Board =
                     me.getBlockWidth() * 2 + (cWidth % me.getBlockWidth());
                 var fWidth = Math.min(
                     maxBoardWidth() - wEdgeSpace,
-                    cWidth - wEdgeSpace
+                    cWidth - wEdgeSpace,
                 );
                 var hEdgeSpace =
                     me.getBlockHeight() * 3 + (cHeight % me.getBlockHeight());
                 var fHeight = Math.min(
                     maxBoardHeight() - hEdgeSpace,
-                    cHeight - hEdgeSpace
+                    cHeight - hEdgeSpace,
                 );
 
                 elmContainer.style.left = cLeft + "px";
@@ -947,7 +947,7 @@ SNAKE.Board =
                             elmContainer,
                             "keydown",
                             myKeyListener,
-                            false
+                            false,
                         );
 
                         myKeyListener = function (evt) {
@@ -974,7 +974,7 @@ SNAKE.Board =
                             elmContainer,
                             "keydown",
                             myKeyListener,
-                            false
+                            false,
                         );
 
                         mySnake.rebirth();
@@ -997,7 +997,7 @@ SNAKE.Board =
                     elmContainer,
                     "keydown",
                     myKeyListener,
-                    false
+                    false,
                 );
             };
 
@@ -1006,7 +1006,7 @@ SNAKE.Board =
                 if (mySnake.snakeLength > localStorage.jsSnakeHighScore) {
                     localStorage.setItem(
                         "jsSnakeHighScore",
-                        mySnake.snakeLength
+                        mySnake.snakeLength,
                     );
                     elmHighscorePanel.innerHTML =
                         "Punti Max: " + localStorage.jsSnakeHighScore;
@@ -1047,7 +1047,7 @@ SNAKE.Board =
                     function () {
                         me.setupPlayingField();
                     },
-                    false
+                    false,
                 );
             }
 

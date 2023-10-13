@@ -71,7 +71,7 @@ var Game = {
             Pong.canvas.width / 2 - 350,
             Pong.canvas.height / 2 - 48,
             700,
-            100
+            100,
         );
 
         Pong.context.fillStyle = "#ffffff";
@@ -79,7 +79,7 @@ var Game = {
         Pong.context.fillText(
             text,
             Pong.canvas.width / 2,
-            Pong.canvas.height / 2 + 15
+            Pong.canvas.height / 2 + 15,
         );
 
         setTimeout(function () {
@@ -98,7 +98,7 @@ var Game = {
             this.canvas.width / 2 - 350,
             this.canvas.height / 2 - 48,
             700,
-            100
+            100,
         );
 
         this.context.fillStyle = "#ffffff";
@@ -106,7 +106,7 @@ var Game = {
         this.context.fillText(
             "Premi qualsiasi tasto",
             this.canvas.width / 2,
-            this.canvas.height / 2 + 15
+            this.canvas.height / 2 + 15,
         );
     },
 
@@ -228,14 +228,14 @@ var Game = {
             this.player.x,
             this.player.y,
             this.player.width,
-            this.player.height
+            this.player.height,
         );
 
         this.context.fillRect(
             this.paddle.x,
             this.paddle.y,
             this.paddle.width,
-            this.paddle.height
+            this.paddle.height,
         );
 
         if (Pong._turnDelayIsOver.call(this)) {
@@ -243,7 +243,7 @@ var Game = {
                 this.ball.x,
                 this.ball.y,
                 this.ball.width,
-                this.ball.height
+                this.ball.height,
             );
         }
 
@@ -261,13 +261,13 @@ var Game = {
         this.context.fillText(
             this.player.score.toString(),
             this.canvas.width / 2 - 300,
-            200
+            200,
         );
 
         this.context.fillText(
             this.paddle.score.toString(),
             this.canvas.width / 2 + 300,
-            200
+            200,
         );
 
         this.context.font = "30px Courier New";
@@ -275,7 +275,7 @@ var Game = {
         this.context.fillText(
             "Round " + (Pong.round + 1),
             this.canvas.width / 2,
-            35
+            35,
         );
 
         this.context.font = "40px Courier";
@@ -283,7 +283,7 @@ var Game = {
         this.context.fillText(
             rounds[Pong.round] ? rounds[Pong.round] : rounds[Pong.round - 1],
             this.canvas.width / 2,
-            100
+            100,
         );
     },
 

@@ -223,7 +223,7 @@ function render() {
         runCodeForAllCells(function (cell) {
             if (!cell.bomb && cell.flagged) {
                 var td = document.querySelector(
-                    `[data-row="${cell.row}"][data-col="${cell.col}"]`
+                    `[data-row="${cell.row}"][data-col="${cell.col}"]`,
                 );
                 td.innerHTML = wrongBombImage;
             }
