@@ -1,5 +1,5 @@
 var SNAKE = SNAKE || {};
-window.SNAKE = SNAKE;
+window.SNAKE = SNAKE; 
 
 SNAKE.addEventListener = (function() {
     if (window.addEventListener) {
@@ -12,7 +12,6 @@ SNAKE.addEventListener = (function() {
         };
     }
 })();
-
 
 SNAKE.removeEventListener = (function() {
     if (window.removeEventListener) {
@@ -28,7 +27,6 @@ SNAKE.removeEventListener = (function() {
 
 SNAKE.Snake = SNAKE.Snake || (function() {
 
-            
     var instanceNumber = 0;
     var blockPool = [];
 
@@ -43,7 +41,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
         this.prev = null;
     };
 
-        function getNextHighestZIndex(myObj) {
+    function getNextHighestZIndex(myObj) {
         var highestIndex = 0,
             currentIndex = 0,
             ii;
@@ -60,17 +58,11 @@ SNAKE.Snake = SNAKE.Snake || (function() {
         return(highestIndex+1);
     }
 
-            
-            config options:
-            playingBoard - the SnakeBoard that this snake belongs too.
-            startRow - The row the snake should start on.
-            startCol - The column the snake should start on.
-        return function(config) {
+    return function(config) {
 
         if (!config||!config.playingBoard) {return;}
         if (localStorage.jsSnakeHighScore === undefined) localStorage.setItem('jsSnakeHighScore', 0);
 
-        
         var me = this,
             playingBoard = config.playingBoard,
             myId = instanceNumber++,
@@ -79,7 +71,8 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             preMove = -1,
             isFirstMove = true,
             isFirstGameMove = true,
-            currentDirection = -1,             columnShift = [0, 1, 0, -1],
+            currentDirection = -1, 
+            columnShift = [0, 1, 0, -1],
             rowShift = [-1, 0, 1, 0],
             xPosShift = [],
             yPosShift = [],
@@ -96,7 +89,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 modeDropdown.addEventListener('change', function(evt) {
                     evt = evt || {};
                     var val = evt.target ? parseInt(evt.target.value) : 75;
-                    
+
                     if (isNaN(val)) {
                         val = 75;
                     } else if (val < 25) {
@@ -111,11 +104,13 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 });
             }
 
-                                    
-                me.snakeBody = {};
-        me.snakeBody["b0"] = new SnakeBlock();         me.snakeBody["b0"].row = config.startRow || 1;
+        me.snakeBody = {};
+        me.snakeBody["b0"] = new SnakeBlock(); 
+        me.snakeBody["b0"].row = config.startRow || 1;
         me.snakeBody["b0"].col = config.startCol || 1;
-        me.snakeBody["b0"].xPos = me.snakeBody["b0"].row         me.snakeBody["b0"].yPos = me.snakeBody["b0"].col         me.snakeBody["b0"].elm = createSnakeElement();
+        me.snakeBody["b0"].xPos = me.snakeBody["b0"].row * playingBoard.getBlockWidth();
+        me.snakeBody["b0"].yPos = me.snakeBody["b0"].col * playingBoard.getBlockHeight();
+        me.snakeBody["b0"].elm = createSnakeElement();
         me.snakeBody["b0"].elmStyle = me.snakeBody["b0"].elm.style;
         playingBoard.getBoardContainer().appendChild( me.snakeBody["b0"].elm );
         me.snakeBody["b0"].elm.style.left = me.snakeBody["b0"].xPos + "px";
@@ -130,7 +125,6 @@ SNAKE.Snake = SNAKE.Snake || (function() {
         me.snakeHead.elm.id = "snake-snakehead-alive";
         me.snakeHead.elm.className += " snake-snakebody-alive";
 
-        
         function createSnakeElement() {
             var tempNode = document.createElement("div");
             tempNode.className = "snake-snakebody-block";
@@ -177,7 +171,6 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             handleFunc();
         }
 
-        
         me.setPaused = function(val) {
             isPaused = val;
         };
@@ -185,17 +178,11 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             return isPaused;
         };
 
-                                                            Handles what happens when an arrow key is pressed.
-            Direction explained (0 = up, etc etc)
-                    0
-                  3   1
-                    2
-                me.handleArrowKeys = function(keyNum) {
+        me.handleArrowKeys = function(keyNum) {
              if (isDead || (isPaused && !config.premoveOnPause)) {return;}
 
             var snakeLength = me.snakeLength;
 
-                        
             let directionFound = -1;
 
             switch (keyNum) {
@@ -216,21 +203,24 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                     directionFound = 2;
                     break;
             }
-            if (currentDirection !== lastMove)              {
+            if (currentDirection !== lastMove)  
+            {
                 preMove = directionFound;
             }
-            if (Math.abs(directionFound - lastMove) !== 2 && (isFirstMove || isPaused) || isFirstGameMove )              {
+            if (Math.abs(directionFound - lastMove) !== 2 && (isFirstMove || isPaused) || isFirstGameMove )  
+            {
                 currentDirection = directionFound;
                 isFirstMove = false;
                 isFirstGameMove = false;
             }
         };
 
-                                        me.go = function() {
+        me.go = function() {
 
             var oldHead = me.snakeHead,
                 newHead = me.snakeTail,
                 grid = playingBoard.grid; 
+
             if (isPaused === true) {
                 setTimeout(function(){me.go();}, snakeSpeed);
                 return;
@@ -239,14 +229,16 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             me.snakeTail = newHead.prev;
             me.snakeHead = newHead;
 
-                        if ( grid[newHead.row] && grid[newHead.row][newHead.col] ) {
+            if ( grid[newHead.row] && grid[newHead.row][newHead.col] ) {
                 grid[newHead.row][newHead.col] = 0;
             }
 
             if (currentDirection !== -1){
                 lastMove = currentDirection;
-                if (preMove !== -1)                  {
-                    currentDirection = preMove;                      preMove = -1;
+                if (preMove !== -1)  
+                {
+                    currentDirection = preMove;  
+                    preMove = -1;
                 }
             }
             isFirstMove = true;
@@ -266,10 +258,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 newHead.elm.id="snake-snakehead-alive";
                 oldHead.elm.id = "";
             }
-            
-            
 
-            
             if (grid[newHead.row][newHead.col] === 0) {
                 grid[newHead.row][newHead.col] = 1;
                 setTimeout(function(){me.go();}, snakeSpeed);
@@ -285,9 +274,10 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             }
         };
 
-                                                        me.eatFood = function() {
+        me.eatFood = function() {
             if (blockPool.length <= growthIncr) {
-                createBlocks(growthIncr            }
+                createBlocks(growthIncr*2);
+            }
             var blocks = blockPool.splice(0, growthIncr);
 
             var ii = blocks.length,
@@ -310,7 +300,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
                 return false;
             }
 
-                                    var selectDropDown = document.getElementById("selectMode");
+            var selectDropDown = document.getElementById("selectMode");
             var selectedOption = selectDropDown.options[selectDropDown.selectedIndex];
 
             if(selectedOption.text.localeCompare("Rush") == 0)
@@ -321,25 +311,26 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             return true;
         };
 
-                                        me.handleDeath = function() {
-                        var selectedSpeed = document.getElementById("selectMode").value;
+        me.handleDeath = function() {
+
+            var selectedSpeed = document.getElementById("selectMode").value;
             snakeSpeed = parseInt(selectedSpeed);
-            
+
             handleEndCondition(playingBoard.handleDeath);
         };
 
-                                        me.handleWin = function() {
+        me.handleWin = function() {
             handleEndCondition(playingBoard.handleWin);
         };
 
-                                        me.rebirth = function() {
+        me.rebirth = function() {
             isDead = false;
             isFirstMove = true;
             isFirstGameMove = true;
             preMove = -1;
         };
 
-                                        me.reset = function() {
+        me.reset = function() {
             if (isDead === false) {return;}
 
             var blocks = [],
@@ -370,37 +361,37 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             me.snakeHead.elm.id = "snake-snakehead-alive";
             me.snakeHead.row = config.startRow || 1;
             me.snakeHead.col = config.startCol || 1;
-            me.snakeHead.xPos = me.snakeHead.row             me.snakeHead.yPos = me.snakeHead.col             me.snakeHead.elm.style.left = me.snakeHead.xPos + "px";
+            me.snakeHead.xPos = me.snakeHead.row * playingBoard.getBlockWidth();
+            me.snakeHead.yPos = me.snakeHead.col * playingBoard.getBlockHeight();
+            me.snakeHead.elm.style.left = me.snakeHead.xPos + "px";
             me.snakeHead.elm.style.top = me.snakeHead.yPos + "px";
         };
 
-                                createBlocks(growthIncr        xPosShift[0] = 0;
+        createBlocks(growthIncr*2);
+        xPosShift[0] = 0;
         xPosShift[1] = playingBoard.getBlockWidth();
         xPosShift[2] = 0;
-        xPosShift[3] = -1 
-        yPosShift[0] = -1         yPosShift[1] = 0;
+        xPosShift[3] = -1 * playingBoard.getBlockWidth();
+
+        yPosShift[0] = -1 * playingBoard.getBlockHeight();
+        yPosShift[1] = 0;
         yPosShift[2] = playingBoard.getBlockHeight();
         yPosShift[3] = 0;
     };
 })();
 
-
 SNAKE.Food = SNAKE.Food || (function() {
 
-            
     var instanceNumber = 0;
 
     function getRandomPosition(x, y){
-        return Math.floor(Math.random()    }
+        return Math.floor(Math.random()*(y+1-x)) + x;
+    }
 
-            
-            config options:
-            playingBoard - the SnakeBoard that this object belongs too.
-        return function(config) {
+    return function(config) {
 
         if (!config||!config.playingBoard) {return;}
 
-        
         var me = this;
         var playingBoard = config.playingBoard;
         var fRow, fColumn;
@@ -415,13 +406,13 @@ SNAKE.Food = SNAKE.Food || (function() {
         elmFood.style.top = "-1000px";
         playingBoard.getBoardContainer().appendChild(elmFood);
 
-        
-                                        me.getFoodElement = function() {
+        me.getFoodElement = function() {
             return elmFood;
         };
 
-                                                me.randomlyPlaceFood = function() {
-                        if (playingBoard.grid[fRow] && playingBoard.grid[fRow][fColumn] === playingBoard.getGridFoodValue()){
+        me.randomlyPlaceFood = function() {
+
+            if (playingBoard.grid[fRow] && playingBoard.grid[fRow][fColumn] === playingBoard.getGridFoodValue()){
                 playingBoard.grid[fRow][fColumn] = 0;
             }
 
@@ -434,7 +425,7 @@ SNAKE.Food = SNAKE.Food || (function() {
                 row = getRandomPosition(1, maxRows);
                 col = getRandomPosition(1, maxCols);
 
-                                                                numTries++;
+                numTries++;
                 if (numTries > 20000){
                     return false;
                 }
@@ -443,18 +434,18 @@ SNAKE.Food = SNAKE.Food || (function() {
             playingBoard.grid[row][col] = playingBoard.getGridFoodValue();
             fRow = row;
             fColumn = col;
-            elmFood.style.top = row             elmFood.style.left = col             return true;
+            elmFood.style.top = row * playingBoard.getBlockHeight() + "px";
+            elmFood.style.left = col * playingBoard.getBlockWidth() + "px";
+            return true;
         };
     };
 })();
 
-
 SNAKE.Board = SNAKE.Board || (function() {
 
-            
     var instanceNumber = 0;
 
-        function getNextHighestZIndex(myObj) {
+    function getNextHighestZIndex(myObj) {
         var highestIndex = 0,
             currentIndex = 0,
             ii;
@@ -471,43 +462,50 @@ SNAKE.Board = SNAKE.Board || (function() {
         return(highestIndex+1);
     }
 
-            This function returns the width of the available screen real estate that we have
-        function getClientWidth(){
+    function getClientWidth(){
         var myWidth = 0;
         if( typeof window.innerWidth === "number" ) {
-            myWidth = window.innerWidth;        } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
-            myWidth = document.documentElement.clientWidth;        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
-            myWidth = document.body.clientWidth;        }
+            myWidth = window.innerWidth;
+        } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+            myWidth = document.documentElement.clientWidth;
+        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+            myWidth = document.body.clientWidth;
+        }
         return myWidth;
     }
-            This function returns the height of the available screen real estate that we have
-        function getClientHeight(){
+
+    function getClientHeight(){
         var myHeight = 0;
         if( typeof window.innerHeight === "number" ) {
-            myHeight = window.innerHeight;        } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
-            myHeight = document.documentElement.clientHeight;        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
-            myHeight = document.body.clientHeight;        }
+            myHeight = window.innerHeight;
+        } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+            myHeight = document.documentElement.clientHeight;
+        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+            myHeight = document.body.clientHeight;
+        }
         return myHeight;
     }
 
-            
     return function(inputConfig) {
 
-                var me = this,
+        var me = this,
             myId = instanceNumber++,
             config = inputConfig || {},
             MAX_BOARD_COLS = 250,
             MAX_BOARD_ROWS = 250,
             blockWidth = 20,
             blockHeight = 20,
-            GRID_FOOD_VALUE = -1,             myFood,
+            GRID_FOOD_VALUE = -1, 
+            myFood,
             mySnake,
-            boardState = 1,             myKeyListener,
-            isPaused = false,                        elmContainer, elmPlayingField, elmAboutPanel, elmLengthPanel, elmHighscorePanel, elmWelcome, elmTryAgain, elmWin, elmPauseScreen;
+            boardState = 1, 
+            myKeyListener,
+            isPaused = false,
 
-                me.grid = [];
+            elmContainer, elmPlayingField, elmLengthPanel, elmHighscorePanel, elmWelcome, elmTryAgain, elmWin, elmPauseScreen;
 
-                        
+        me.grid = [];
+
         function createBoardElements() {
             elmPlayingField = document.createElement("div");
             elmPlayingField.setAttribute("id", "playingField");
@@ -521,9 +519,6 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmPauseScreen.className = "snake-pause-screen";
             elmPauseScreen.innerHTML = "<div style='padding:10px;'>[Paused]<p/>Press [space] to unpause.</div>";
 
-            elmAboutPanel = document.createElement("div");
-            elmAboutPanel.className = "snake-panel-component";
-            elmAboutPanel.innerHTML = "<a href='http:
             elmLengthPanel = document.createElement("div");
             elmLengthPanel.className = "snake-panel-component";
             elmLengthPanel.innerHTML = "Length: 1";
@@ -549,7 +544,6 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmPauseScreen.style.zIndex = 10000;
             elmContainer.appendChild(elmPauseScreen);
             elmContainer.appendChild(elmPlayingField);
-            elmContainer.appendChild(elmAboutPanel);
             elmContainer.appendChild(elmLengthPanel);
             elmContainer.appendChild(elmHighscorePanel);
             elmContainer.appendChild(elmWelcome);
@@ -558,13 +552,15 @@ SNAKE.Board = SNAKE.Board || (function() {
 
             mySnake = new SNAKE.Snake({playingBoard:me,startRow:2,startCol:2,premoveOnPause: config.premoveOnPause});
             myFood = new SNAKE.Food({playingBoard: me});
-            
+
             elmWelcome.style.zIndex = 1000;
         }
         function maxBoardWidth() {
-            return MAX_BOARD_COLS         }
+            return MAX_BOARD_COLS * me.getBlockWidth();
+        }
         function maxBoardHeight() {
-            return MAX_BOARD_ROWS         }
+            return MAX_BOARD_ROWS * me.getBlockHeight();
+        }
 
         function createWelcomeElement() {
              var tmpElm = document.createElement("div");
@@ -651,7 +647,6 @@ SNAKE.Board = SNAKE.Board || (function() {
             me.setBoardState(0);
         }
 
-                        
         me.setPaused = function(val) {
             isPaused = val;
             mySnake.setPaused(val);
@@ -665,25 +660,30 @@ SNAKE.Board = SNAKE.Board || (function() {
             return isPaused;
         };
 
-                                        me.resetBoard = function() {
+        me.resetBoard = function() {
             SNAKE.removeEventListener(elmContainer, "keydown", myKeyListener, false);
             mySnake.reset();
             elmLengthPanel.innerHTML = "Length: 1";
             me.setupPlayingField();
         };
-                                                me.getBoardState = function() {
+
+        me.getBoardState = function() {
             return boardState;
         };
-                                                me.setBoardState = function(state) {
+
+        me.setBoardState = function(state) {
             boardState = state;
         };
-                                        me.getGridFoodValue = function() {
+
+        me.getGridFoodValue = function() {
             return GRID_FOOD_VALUE;
         };
-                                        me.getPlayingFieldElement = function() {
+
+        me.getPlayingFieldElement = function() {
             return elmPlayingField;
         };
-                                        me.setBoardContainer = function(myContainer) {
+
+        me.setBoardContainer = function(myContainer) {
             if (typeof myContainer === "string") {
                 myContainer = document.getElementById(myContainer);
             }
@@ -693,26 +693,31 @@ SNAKE.Board = SNAKE.Board || (function() {
 
             me.setupPlayingField();
         };
-                                        me.getBoardContainer = function() {
+
+        me.getBoardContainer = function() {
             return elmContainer;
         };
-                                        me.getBlockWidth = function() {
+
+        me.getBlockWidth = function() {
             return blockWidth;
         };
-                                        me.getBlockHeight = function() {
+
+        me.getBlockHeight = function() {
             return blockHeight;
         };
-                                        me.setupPlayingField = function () {
+
+        me.setupPlayingField = function () {
 
             if (!elmPlayingField) {createBoardElements();} 
-                        var cWidth, cHeight;
+
+            var cWidth, cHeight;
             var cTop, cLeft;
             if (config.fullScreen === true) {
                 cTop = 0;
                 cLeft = 0;
                 cWidth = getClientWidth()-20;
                 cHeight = getClientHeight()-20;
-                
+
             } else {
                 cTop = config.top;
                 cLeft = config.left;
@@ -720,8 +725,10 @@ SNAKE.Board = SNAKE.Board || (function() {
                 cHeight = config.height;
             }
 
-                        var wEdgeSpace = me.getBlockWidth()            var fWidth = Math.min(maxBoardWidth()-wEdgeSpace,cWidth-wEdgeSpace);
-            var hEdgeSpace = me.getBlockHeight()            var fHeight = Math.min(maxBoardHeight()-hEdgeSpace,cHeight-hEdgeSpace);
+            var wEdgeSpace = me.getBlockWidth()*2 + (cWidth % me.getBlockWidth());
+            var fWidth = Math.min(maxBoardWidth()-wEdgeSpace,cWidth-wEdgeSpace);
+            var hEdgeSpace = me.getBlockHeight()*3 + (cHeight % me.getBlockHeight());
+            var fHeight = Math.min(maxBoardHeight()-hEdgeSpace,cHeight-hEdgeSpace);
 
             elmContainer.style.left = cLeft + "px";
             elmContainer.style.top = cTop + "px";
@@ -732,12 +739,8 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmPlayingField.style.width = fWidth + "px";
             elmPlayingField.style.height = fHeight + "px";
 
-                                    var bottomPanelHeight = hEdgeSpace - me.getBlockHeight();
+            var bottomPanelHeight = hEdgeSpace - me.getBlockHeight();
             var pLabelTop = me.getBlockHeight() + fHeight + Math.round((bottomPanelHeight - 30)/2) + "px";
-
-            elmAboutPanel.style.top = pLabelTop;
-            elmAboutPanel.style.width = "450px";
-            elmAboutPanel.style.left = Math.round(cWidth/2) - Math.round(450/2) + "px";
 
             elmLengthPanel.style.top = pLabelTop;
             elmLengthPanel.style.left = 30 + "px";
@@ -745,7 +748,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmHighscorePanel.style.top = pLabelTop;
             elmHighscorePanel.style.left = cWidth - 140 + "px";
 
-                        if (cWidth < 700) {
+            if (cWidth < 700) {
                 elmAboutPanel.style.display = "none";
             } else {
                 elmAboutPanel.style.display = "block";
@@ -759,8 +762,10 @@ SNAKE.Board = SNAKE.Board || (function() {
                 me.grid[row] = [];
                 for (var col = 0; col < numBoardCols; col++) {
                     if (col === 0 || row === 0 || col === (numBoardCols-1) || row === (numBoardRows-1)) {
-                        me.grid[row][col] = 1;                     } else {
-                        me.grid[row][col] = 0;                     }
+                        me.grid[row][col] = 1; 
+                    } else {
+                        me.grid[row][col] = 0; 
+                    }
                 }
             }
 
@@ -772,13 +777,14 @@ SNAKE.Board = SNAKE.Board || (function() {
 
                 if (me.getBoardState() === 1) {
                     if ( !(keyNum >= 37 && keyNum <= 40) && !(keyNum === 87 || keyNum === 65 || keyNum === 83 || keyNum === 68)) {return;} 
-                                        SNAKE.removeEventListener(elmContainer, "keydown", myKeyListener, false);
+
+                    SNAKE.removeEventListener(elmContainer, "keydown", myKeyListener, false);
 
                     myKeyListener = function(evt) {
                         if (!evt) var evt = window.event;
                         var keyNum = (evt.which) ? evt.which : evt.keyCode;
 
-                                                if (keyNum === 32) {
+                        if (keyNum === 32) {
 							if(me.getBoardState()!=0)
                                 me.setPaused(!me.getPaused());
                         }
@@ -794,7 +800,8 @@ SNAKE.Board = SNAKE.Board || (function() {
 
                     mySnake.rebirth();
                     mySnake.handleArrowKeys(keyNum);
-                    me.setBoardState(2);                     mySnake.go();
+                    me.setBoardState(2); 
+                    mySnake.go();
                 }
 
                 evt.cancelBubble = true;
@@ -803,10 +810,10 @@ SNAKE.Board = SNAKE.Board || (function() {
                 return false;
             };
 
-                        SNAKE.addEventListener( elmContainer, "keydown", myKeyListener, false);
+            SNAKE.addEventListener( elmContainer, "keydown", myKeyListener, false);
         };
 
-                                                        me.foodEaten = function() {
+        me.foodEaten = function() {
             elmLengthPanel.innerHTML = "Length: " + mySnake.snakeLength;
             if (mySnake.snakeLength > localStorage.jsSnakeHighScore)
             {
@@ -819,15 +826,14 @@ SNAKE.Board = SNAKE.Board || (function() {
             return true;
         };
 
-                                        me.handleDeath = function() {
+        me.handleDeath = function() {
             handleEndCondition(elmTryAgain);
         };
 
-                                        me.handleWin = function () {
+        me.handleWin = function () {
             handleEndCondition(elmWin);
         };
 
-                        
         config.fullScreen = (typeof config.fullScreen === "undefined") ? false : config.fullScreen;
         config.top = (typeof config.top === "undefined") ? 0 : config.top;
         config.left = (typeof config.left === "undefined") ? 0 : config.left;
@@ -847,4 +853,5 @@ SNAKE.Board = SNAKE.Board || (function() {
             me.setBoardContainer(config.boardContainer);
         }
 
-    }; })();  
+    }; 
+})();
