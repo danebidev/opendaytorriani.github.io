@@ -30,10 +30,10 @@ var elapsedTime;
 var timerId;
 var winner;
 
-/*----- cached element references -----*/
+// cached element reference
 var boardEl = document.getElementById("board");
 
-/*----- event listeners -----*/
+// event reference
 document.getElementById("size-btns").addEventListener("click", function (e) {
     size = parseInt(e.target.id.replace("size-", ""));
     init();
