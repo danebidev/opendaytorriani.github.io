@@ -156,7 +156,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
         function recordScore() {
             var highScore = localStorage.jsSnakeHighScore;
             if (me.snakeLength > highScore) {
-                alert('Congratulations! You have beaten your previous high score, which was ' + highScore + '.');
+                alert('Congratulazioni! Hai superato il punteggio massimo precedente di ' + highScore + '.');
                 localStorage.setItem('jsSnakeHighScore', me.snakeLength);
             }
         }
@@ -521,11 +521,11 @@ SNAKE.Board = SNAKE.Board || (function() {
 
             elmLengthPanel = document.createElement("div");
             elmLengthPanel.className = "snake-panel-component";
-            elmLengthPanel.innerHTML = "Length: 1";
+            elmLengthPanel.innerHTML = "Lunghezza: 1";
 
             elmHighscorePanel = document.createElement("div");
             elmHighscorePanel.className = "snake-panel-component";
-            elmHighscorePanel.innerHTML = "Highscore: " + (localStorage.jsSnakeHighScore || 0);
+            elmHighscorePanel.innerHTML = "Punti Max: " + (localStorage.jsSnakeHighScore || 0);
 
             elmWelcome = createWelcomeElement();
             elmTryAgain = createTryAgainElement();
@@ -570,9 +570,9 @@ SNAKE.Board = SNAKE.Board || (function() {
             var welcomeTxt = document.createElement("div");
             var fullScreenText = "";
             if (config.fullScreen) {
-                fullScreenText = "On Windows, press F11 to play in Full Screen mode.";
+                fullScreenText = "Premi F11 per giocare a schermo intero.";
             }
-            welcomeTxt.innerHTML = "JavaScript Snake<p></p>Use the <strong>arrow keys</strong> on your keyboard to play the game. " + fullScreenText + "<p></p>";
+            welcomeTxt.innerHTML = "Snake<p></p>Usa le <strong>freccette</strong> sulla tua tastiera per giocare. " + fullScreenText + "<p></p>";
             var welcomeStart = document.createElement("button");
             welcomeStart.appendChild(document.createTextNode("Play Game"));
             var loadGame = function() {
@@ -603,9 +603,9 @@ SNAKE.Board = SNAKE.Board || (function() {
             tmpElm.className = elmClassName;
 
             var gameEndTxt = document.createElement("div");
-            gameEndTxt.innerHTML = "JavaScript Snake<p></p>" + message + "<p></p>";
+            gameEndTxt.innerHTML = "Snake<p></p>" + message + "<p></p>";
             var gameEndStart = document.createElement("button");
-            gameEndStart.appendChild(document.createTextNode("Play Again?"));
+            gameEndStart.appendChild(document.createTextNode("Gioca ancora?"));
 
             var reloadGame = function () {
                 tmpElm.style.display = "none";
@@ -631,11 +631,11 @@ SNAKE.Board = SNAKE.Board || (function() {
         }
 
         function createTryAgainElement() {
-            return createGameEndElement("You died :(", "sbTryAgain", "snake-try-again-dialog");
+            return createGameEndElement("Sei morto :(", "sbTryAgain", "snake-try-again-dialog");
         }
 
         function createWinElement() {
-            return createGameEndElement("You win! :D", "sbWin", "snake-win-dialog");
+            return createGameEndElement("Hai vinto! :D", "sbWin", "snake-win-dialog");
         }
 
         function handleEndCondition(elmDialog) {
@@ -663,7 +663,7 @@ SNAKE.Board = SNAKE.Board || (function() {
         me.resetBoard = function() {
             SNAKE.removeEventListener(elmContainer, "keydown", myKeyListener, false);
             mySnake.reset();
-            elmLengthPanel.innerHTML = "Length: 1";
+            elmLengthPanel.innerHTML = "Lunghezza: 1";
             me.setupPlayingField();
         };
 
@@ -808,11 +808,11 @@ SNAKE.Board = SNAKE.Board || (function() {
         };
 
         me.foodEaten = function() {
-            elmLengthPanel.innerHTML = "Length: " + mySnake.snakeLength;
+            elmLengthPanel.innerHTML = "Lunghezza: " + mySnake.snakeLength;
             if (mySnake.snakeLength > localStorage.jsSnakeHighScore)
             {
                 localStorage.setItem("jsSnakeHighScore", mySnake.snakeLength);
-                elmHighscorePanel.innerHTML = "Highscore: " + localStorage.jsSnakeHighScore;
+                elmHighscorePanel.innerHTML = "Punti Max: " + localStorage.jsSnakeHighScore;
             }
             if (!myFood.randomlyPlaceFood()) {
                 return false;
