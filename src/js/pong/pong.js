@@ -104,7 +104,7 @@ var Game = {
                 this.context.fillStyle = "#ffffff";
 
                 this.context.fillText(
-            "Press any key to begin",
+            "Premi qualsiasi tasto per cominciare",
             this.canvas.width / 2,
             this.canvas.height / 2 + 15
         );
