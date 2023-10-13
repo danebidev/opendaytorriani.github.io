@@ -118,7 +118,7 @@ function moveBlocks(e) {
     let check = checkMatrixEquality(prevMatrix, matrixVals);
 
     if (availIndexes.length === 0 && check === true) {
-        gameOver("loose");
+        gameOver("Lose");
     }
 
     if (moves % moveFactor === 0) {
@@ -273,10 +273,10 @@ function checkMatrixEquality(mat1, mat2) {
 
 function gameOver(status) {
     if (status === "Win") {
-        result.innerText = "You Won!!!";
+        result.innerText = "Hai vinto!!!";
         result.style.color = "rgb(78, 236, 144)";
     } else {
-        result.innerText = "You Loose!!!";
+        result.innerText = "Hai perso!!!";
         result.style.color = "rgb(252, 51, 51)";
     }
 }
