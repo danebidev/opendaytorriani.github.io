@@ -156,3 +156,11 @@ a{
     bottom: 0;
     margin-bottom: 10%;
 }
+
+.source {
+    position: absolute;
+    text-align: right;
+    bottom: 1%;
+    right: 1%;
+    color: #2ca4bf;
+}
